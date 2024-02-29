@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:58:42 by escura            #+#    #+#             */
-/*   Updated: 2024/02/24 23:01:16 by escura           ###   ########.fr       */
+/*   Updated: 2024/02/29 20:30:38 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 bool	is_dead(t_data *data, t_philo *philo)
 {
-	const size_t	start_time = philo->start_time;
-	const size_t	last_meal = philo->last_meal;
+	size_t	last_meal;
 	const size_t	time_to_die = data->input->time_to_die;
 	const size_t	current_time = get_time();
 
 	mutex_lock(&(data->eat_mutex));
+	last_meal = philo->last_meal;
 	if ((current_time - last_meal) >= time_to_die && !philo->eating)
 	{
 		mutex_unlock(&(data->eat_mutex));
@@ -31,7 +31,7 @@ bool	is_dead(t_data *data, t_philo *philo)
 
 bool	check_if_dead(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < data->input->num_of_philos)
@@ -51,11 +51,13 @@ bool	check_if_dead(t_data *data)
 
 bool	check_if_eaten(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 	int	eaten;
 
 	i = 0;
 	eaten = 0;
+	if(data->input->num_to_eat == -1)
+		return (false);
 	while (i < data->input->num_of_philos)
 	{
 		mutex_lock(&data->eat_mutex);
@@ -64,7 +66,7 @@ bool	check_if_eaten(t_data *data)
 		mutex_unlock(&data->eat_mutex);
 		i++;
 	}
-	if (eaten == data->input->num_of_philos)
+	if (eaten == (int)data->input->num_of_philos)
 	{
 		mutex_lock(&data->dead_mutex);
 		data->dead = true;
@@ -76,8 +78,8 @@ bool	check_if_eaten(t_data *data)
 
 void	*monitor_death(void *arg)
 {
-	t_data	*data;
-	int		i;
+	t_data			*data;
+	unsigned int	i;
 
 	data = (t_data *)arg;
 	i = 0;
@@ -86,7 +88,7 @@ void	*monitor_death(void *arg)
 	{
 		if (check_if_dead(data) || check_if_eaten(data))
 		{
-			break ;
+			return (NULL);
 		}
 	}
 	return (NULL);

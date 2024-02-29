@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:00:01 by escura            #+#    #+#             */
-/*   Updated: 2024/02/24 23:11:47 by escura           ###   ########.fr       */
+/*   Updated: 2024/02/29 18:19:36 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	clean(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	while (i < data->input->num_of_philos)
+	while (i > 1 && i < data->input->num_of_philos)
 	{
 		mutex_destroy(&data->forks[i]);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:47:28 by escura            #+#    #+#             */
-/*   Updated: 2024/02/24 23:17:33 by escura           ###   ########.fr       */
+/*   Updated: 2024/02/29 20:21:40 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_input
 	size_t				time_to_die;
 	size_t				time_to_eat;
 	size_t				time_to_sleep;
-	size_t				num_to_eat;
+	int					num_to_eat;
 }						t_input;
 
 typedef struct s_philo

@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:00:11 by escura            #+#    #+#             */
-/*   Updated: 2024/02/24 23:04:36 by escura           ###   ########.fr       */
+/*   Updated: 2024/02/29 19:31:08 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	create_threads_philos(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < data->input->num_of_philos)
@@ -33,7 +33,7 @@ static bool	create_threads_philos(t_data *data)
 
 static bool	join_threads_philos(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < data->input->num_of_philos)
@@ -51,9 +51,8 @@ static bool	join_threads_philos(t_data *data)
 bool	start_threads(t_data *data)
 {
 	pthread_t	monitor;
-	int			i;
 
-	if (pthread_create(&monitor, NULL, &monitor_death, (void *)data) != 0)
+	if (pthread_create(&monitor, NULL, &monitor_death, data) != 0)
 	{
 		printf(RED "Error: Failed to create monitor thread\n");
 		return (clean(data), false);

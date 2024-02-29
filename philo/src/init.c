@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:19 by escura            #+#    #+#             */
-/*   Updated: 2024/02/24 23:14:06 by escura           ###   ########.fr       */
+/*   Updated: 2024/02/29 20:08:03 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static bool	validate_input(int nb, char **args)
 		if (!is_digit(args[i]))
 		{
 			printf("Error: Invalid input\n");
+			return (false);
+		}
+		if(i == 4 && ft_atoi(args[i]) <= 0)
+		{
+			printf("Error: Num to eat must be greater than 0\n");
 			return (false);
 		}
 		i++;
@@ -56,8 +61,8 @@ bool	init_input(int nb, char **args, t_input *input)
 
 void	init_philos(t_data *data)
 {
-	int		i;
-	t_philo	*philo;
+	unsigned int	i;
+	t_philo			*philo;
 
 	i = 0;
 	while (i < data->input->num_of_philos)
@@ -80,7 +85,7 @@ void	init_forks(pthread_mutex_t *forks, size_t num_of_philos)
 	int	i;
 
 	i = 0;
-	while (i < num_of_philos)
+	while (i < (int)num_of_philos)
 	{
 		mutex_init(&forks[i]);
 		i++;
