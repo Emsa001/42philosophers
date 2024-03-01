@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 23:14:52 by escura            #+#    #+#             */
-/*   Updated: 2024/02/29 20:32:12 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/01 21:09:21 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	print_action(t_philo *philo, char *msg)
 {
 	const size_t	time = get_time() - philo->start_time;
 
-	// if (check_if_eaten(philo->data))
-	// 	return ;
 	if (!mutex_lock(&philo->data->print_mutex))
 		return ;
 	if (!dead_loop(philo) && !check_if_eaten(philo->data))
