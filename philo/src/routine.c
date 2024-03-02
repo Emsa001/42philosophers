@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:55:29 by escura            #+#    #+#             */
-/*   Updated: 2024/03/02 19:35:06 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 19:57:09 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	sleeep(t_philo *philo)
 void	think(t_philo *philo)
 {
 	print_action(philo, CYAN "is thinking");
+	usleep(1000);
 }
 
 
@@ -80,7 +81,7 @@ void	*routine(void *philo_ptr)
 
 	philo = (t_philo *)philo_ptr;
 	if (philo->id % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(philo->data->input->time_to_eat);
 	while (dead_loop(philo) == false)
 	{
 		eat(philo);
