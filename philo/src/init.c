@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:19 by escura            #+#    #+#             */
-/*   Updated: 2024/03/02 16:10:24 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 19:07:20 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ void	init_forks(pthread_mutex_t *forks, size_t num_of_philos)
 
 void	init_data(t_data *data, t_input input)
 {
+	data->canStart = false;
 	data->dead = false;
 	data->input = &input;
+	data->routine_round = 1;
 	mutex_init(&data->print_mutex);
 	mutex_init(&data->dead_mutex);
 	mutex_init(&data->eat_mutex);

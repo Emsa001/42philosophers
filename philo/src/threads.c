@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:00:11 by escura            #+#    #+#             */
-/*   Updated: 2024/02/29 19:31:08 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 18:59:06 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ bool	start_threads(t_data *data)
 	}
 	if (join_threads_philos(data) == false)
 		return (false);
+
 	return (true);
 }
