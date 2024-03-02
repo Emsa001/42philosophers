@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:58:42 by escura            #+#    #+#             */
-/*   Updated: 2024/03/02 18:28:27 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 20:21:18 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,13 @@ bool	check_if_eaten(t_data *data)
 void	*monitor_death(void *arg)
 {
 	t_data			*data;
-	unsigned int	i;
 
 	data = (t_data *)arg;
-	i = 0;
 	ft_usleep(data->input->time_to_die);
 	while (1)
 	{
 		if (check_if_dead(data) || check_if_eaten(data))
-		{
 			return (NULL);
-		}
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:47:28 by escura            #+#    #+#             */
-/*   Updated: 2024/03/02 19:06:32 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 20:22:18 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ typedef struct s_philo
 typedef struct s_data
 {
 	bool				dead;
-	bool	canStart;
-	int routine_round;
+	int					routine_round;
 
 	t_input				*input;
 
