@@ -6,57 +6,60 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:55:29 by escura            #+#    #+#             */
-/*   Updated: 2024/03/01 22:12:33 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 16:08:57 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// bool	take_forks(t_philo *philo)
-// {
-//     mutex_lock(philo->r_fork);
-//     print_action(philo, GRAY "has taken a fork");
-//     if (philo->data->input->num_of_philos == 1)
-//     {
-//         ft_usleep(philo->data->input->time_to_die);
-//         mutex_unlock(philo->r_fork);
-//         return false;
-//     }
-//     mutex_lock(philo->l_fork);
-//     print_action(philo, GRAY "has taken a fork");
-//     return true;
-// }
-
-bool take_forks(t_philo *philo)
+bool	take_forks(t_philo *philo)
 {
-    // Check if there's only one philosopher
-    if (philo->data->input->num_of_philos == 1)
-    {
-        mutex_lock(philo->r_fork);
-        print_action(philo, GRAY "has taken a fork");
-        ft_usleep(philo->data->input->time_to_die);
-        mutex_unlock(philo->r_fork);
-        return false;
-    }
+	pthread_mutex_t	*fork1;
+	pthread_mutex_t	*fork2;
 
-    // Acquire mutexes in ascending order of their addresses
-    if (philo->r_fork < philo->l_fork) {
-        mutex_lock(philo->r_fork);
-        mutex_lock(philo->l_fork);
-    } else {
-        mutex_lock(philo->l_fork);
-        mutex_lock(philo->r_fork);
-    }
-    
-    print_action(philo, GRAY "has taken a fork");
-    
-    return true;
+	fork1 = philo->r_fork;
+	fork2 = philo->l_fork;
+	mutex_lock(fork1);
+	print_action(philo, GRAY "has taken a fork");
+	if (philo->data->input->num_of_philos == 1)
+	{
+		ft_usleep(philo->data->input->time_to_die);
+		mutex_unlock(fork1);
+		return (false);
+	}
+	mutex_lock(fork2);
+	print_action(philo, GRAY "has taken a fork");
+	return (true);
 }
 
+// bool take_forks(t_philo *philo)
+// {
+//     if (philo->data->input->num_of_philos == 1)
+//     {
+//         mutex_lock(philo->r_fork);
+//         print_action(philo, GRAY "has taken a fork");
+//         ft_usleep(philo->data->input->time_to_die);
+//         mutex_unlock(philo->r_fork);
+//         return (false);
+//     }
+
+//     if (philo->id % 2 == 0) {
+//         mutex_lock(philo->r_fork);
+// 		print_action(philo, GRAY "has taken a fork");
+//         mutex_lock(philo->l_fork);
+// 		print_action(philo, GRAY "has taken a fork");
+//     } else {
+//         mutex_lock(philo->l_fork);
+// 		print_action(philo, GRAY "has taken a fork");
+//         mutex_lock(philo->r_fork);
+// 		print_action(philo, GRAY "has taken a fork");
+//     }
+//     return (true);
+// }
 
 void	eat(t_philo *philo)
 {
-	if(!take_forks(philo))
+	if (!take_forks(philo))
 		return ;
 	philo->eating = true;
 	print_action(philo, GREEN "is eating");
@@ -90,9 +93,12 @@ void	*routine(void *philo_ptr)
 		ft_usleep(1);
 	while (dead_loop(philo) == false)
 	{
-		if (philo->data->input->num_to_eat == -1 || philo->eaten < philo->data->input->num_to_eat)
+		if (philo->data->input->num_to_eat == -1
+			|| philo->eaten < philo->data->input->num_to_eat)
 		{
 			eat(philo);
+			if (philo->data->input->num_of_philos == 1)
+				break ;
 			sleeep(philo);
 			think(philo);
 		}

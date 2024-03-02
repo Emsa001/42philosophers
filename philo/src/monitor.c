@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:58:42 by escura            #+#    #+#             */
-/*   Updated: 2024/03/01 21:51:15 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 16:09:07 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_dead(t_data *data, t_philo *philo)
 {
-	size_t	last_meal;
+	size_t			last_meal;
 	const size_t	time_to_die = data->input->time_to_die;
 	const size_t	current_time = get_time();
 
@@ -52,11 +52,11 @@ bool	check_if_dead(t_data *data)
 bool	check_if_eaten(t_data *data)
 {
 	unsigned int	i;
-	int	eaten;
+	int				eaten;
 
 	i = 0;
 	eaten = 0;
-	if(data->input->num_to_eat == -1)
+	if (data->input->num_to_eat == -1)
 		return (false);
 	while (i < data->input->num_of_philos)
 	{

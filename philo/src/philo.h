@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:47:28 by escura            #+#    #+#             */
-/*   Updated: 2024/02/29 20:21:40 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 16:10:35 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_philo
 	int					id;
 	int					eaten;
 	bool				eating;
+	bool				slept;
+	bool				thought;
 
 	size_t				last_meal;
 	size_t				start_time;

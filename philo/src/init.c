@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:19 by escura            #+#    #+#             */
-/*   Updated: 2024/02/29 20:08:03 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/02 16:10:24 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,20 @@ static bool	validate_input(int nb, char **args)
 	int	i;
 
 	if (nb != 5 && nb != 6)
-	{
-		printf("Error: Invalid number of arguments\n");
-		return (false);
-	}
+		return (printf("Error: Invalid number of arguments\n"), false);
 	i = 0;
 	while (args[i])
 	{
 		if (!is_digit(args[i]))
-		{
-			printf("Error: Invalid input\n");
-			return (false);
-		}
-		if(i == 4 && ft_atoi(args[i]) <= 0)
-		{
-			printf("Error: Num to eat must be greater than 0\n");
-			return (false);
-		}
+			return (printf("Error: Invalid input\n"), false);
+		if (i == 4 && ft_atoi(args[i]) <= 0)
+			return (printf("Error: Num to eat must be greater than 0\n"),
+				false);
 		i++;
 	}
 	if (ft_atoi(args[0]) > 200)
-	{
-		printf("Error: Number of philosophers must be less than 200\n");
-		return (false);
-	}
+		return (printf("Error: Number of philosophers must be less than 200\n"),
+			false);
 	return (true);
 }
 

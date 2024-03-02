@@ -25,8 +25,8 @@ NC=\033[0m # No Color
 
 # Compiler and Flags
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -pthread -fsanitize=thread -g3
+CFLAGS = -Wall -Wextra -Werror -pthread
+# FSANITIZE = -fsanitize=thread
 # Source Files and Object Files
 SRC_DIR = src
 SRC_DIR_BONUS = philo_bonus
@@ -50,13 +50,13 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(call compiling)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(FSANITIZE) $(OBJ) -o $(NAME)
 	@curl 'http://141.148.244.146:8080/ansi?text=42Philos&padding=5'
 	@curl 'http://141.148.244.146:8080/normal?text=by%20escura&padding=75'
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(FSANITIZE) -c $< -o $@
 
 clean:
 	@printf "🧽 $(GREEN)All cleaned up...$(RESET)\n"
