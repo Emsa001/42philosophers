@@ -26,7 +26,7 @@ NC=\033[0m # No Color
 # Compiler and Flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
-# FSANITIZE = -fsanitize=thread
+FSANITIZE = -fsanitize=thread
 # Source Files and Object Files
 SRC_DIR = src
 SRC_DIR_BONUS = philo_bonus

@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:55:19 by escura            #+#    #+#             */
-/*   Updated: 2024/03/02 20:22:25 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/04 14:23:49 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static bool	validate_input(int nb, char **args)
 	}
 	if (ft_atoi(args[0]) > 200)
 		return (printf("Error: Number of philosophers must be less than 200\n"),
+			false);
+	else if (ft_atoi(args[0]) <= 0)
+		return (printf("Error: Number of philosophers must be at least 1\n"),
 			false);
 	return (true);
 }

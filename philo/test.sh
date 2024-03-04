@@ -5,7 +5,7 @@
 # done
 
 echo "testing ./philo 5 80 20 20 5"
-for i in {1..20}
+for i in {1..100}
 do
-    ./philo 5 80 20 20 5 | grep "is eating" | wc -l
+    ./philo 3 410 200 200 5 | grep "is eating" | wc -l
 done

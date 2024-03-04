@@ -6,7 +6,7 @@
 /*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:55:29 by escura            #+#    #+#             */
-/*   Updated: 2024/03/02 20:21:49 by escura           ###   ########.fr       */
+/*   Updated: 2024/03/03 20:03:39 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool	take_forks(t_philo *philo)
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
 
-	mutex_lock(&philo->data->waiter_mutex);
 	fork1 = philo->r_fork;
 	fork2 = philo->l_fork;
 	if (philo->id % 2 == 0)
@@ -30,13 +29,11 @@ bool	take_forks(t_philo *philo)
 	if (philo->data->input->num_of_philos == 1)
 	{
 		ft_usleep(philo->data->input->time_to_die);
-		mutex_unlock(&philo->data->waiter_mutex);
 		mutex_unlock(fork1);
 		return (false);
 	}
 	mutex_lock(fork2);
 	print_action(philo, GRAY "has taken a fork");
-	mutex_unlock(&philo->data->waiter_mutex);
 	return (true);
 }
 
@@ -65,7 +62,7 @@ void	sleeep(t_philo *philo)
 void	think(t_philo *philo)
 {
 	print_action(philo, CYAN "is thinking");
-	usleep(1000);
+	ft_usleep(1);
 }
 
 void	*routine(void *philo_ptr)
@@ -74,7 +71,7 @@ void	*routine(void *philo_ptr)
 
 	philo = (t_philo *)philo_ptr;
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->data->input->time_to_eat);
+		ft_usleep(1);
 	while (dead_loop(philo) == false)
 	{
 		eat(philo);
